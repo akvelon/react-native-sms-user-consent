@@ -3,7 +3,6 @@ import * as React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import SmsUserConsent from 'react-native-sms-user-consent';
 
-
 export default function App() {
   const [result, setResult] = React.useState<number | undefined>();
 
