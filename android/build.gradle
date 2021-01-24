@@ -127,4 +127,6 @@ dependencies {
   // noinspection GradleDynamicVersion
   api 'com.facebook.react:react-native:+'
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+  implementation 'com.google.android.gms:play-services-auth:17.0.0'
+  implementation 'com.google.android.gms:play-services-auth-api-phone:17.4.0'
 }
