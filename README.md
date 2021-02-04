@@ -1,6 +1,9 @@
 # react-native-sms-user-consent
 
-React Native SMS User Consent
+React Native SMS User Consent - React Native module that exposes SMS User Consent API to React Native apps
+It allows apps to read the verification code from an SMS message with the user's permission.
+
+[The official developer guide on Android](https://developers.google.com/identity/sms-retriever/user-consent/overview)
 
 ## Installation
 
