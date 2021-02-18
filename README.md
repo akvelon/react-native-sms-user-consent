@@ -80,7 +80,7 @@ If you have any ideas about the project or found a bug or have a question, feel 
 
 ## Contribution
 
-PRs are always welcome. If you're feeling like contributing to the project, please do. It woudld be great to have all the relevant information with the PR.
+PRs are always welcome. If you're feeling like contributing to the project, please do. It would be great to have all the relevant information with the PR.
 
 To make changes, you'll need to follow these steps:
 1) clone the repo
