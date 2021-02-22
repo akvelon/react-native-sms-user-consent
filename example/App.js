@@ -1,27 +1,25 @@
-import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Text, TextInput, View } from 'react-native';
 
-import {useSmsUserConsent} from 'react-native-sms-user-consent';
+import { useSmsUserConsent } from 'react-native-sms-user-consent';
+import styles from './styles';
 
 export default function App() {
+  const [code, setCode] = useState();
+
   const sms = useSmsUserConsent();
+
+  useEffect(() => {
+    if (sms) {
+      setCode(sms);
+    }
+  }, [sms]);
 
   return (
     <View style={styles.container}>
-      <Text>SMS text: {sms}</Text>
+      <Text style={styles.header}>React Native SMS User Consent</Text>
+      <Text>Please, enter your verification code:</Text>
+      <TextInput value={code} onChangeText={setCode} style={styles.input} />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
-  },
-});
