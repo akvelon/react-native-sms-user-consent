@@ -48,19 +48,6 @@ export function startSmsHandling(onSmsReceived) {
   return stopSmsHandling;
 }
 
-export function addErrorListener(onErrorReceived) {
-  const listener = eventEmitter.addListener(
-    Events.SMS_RETRIEVE_ERROR,
-    onErrorReceived,
-  );
-
-  function removeErrorListener() {
-    listener.remove();
-  }
-
-  return removeErrorListener;
-}
-
 export function useSmsUserConsent() {
   const [sms, setSms] = useState('');
 
@@ -77,6 +64,26 @@ export function useSmsUserConsent() {
   }, []);
 
   return sms;
+}
+
+export function addErrorListener(onErrorReceived) {
+  const listener = eventEmitter.addListener(
+    Events.SMS_RETRIEVE_ERROR,
+    onErrorReceived,
+  );
+
+  function removeErrorListener() {
+    listener.remove();
+  }
+
+  return removeErrorListener;
+}
+
+export function useErrorListener(onErrorReceived) {
+   useEffect(() => {
+    const removeErrorListener = addErrorListener(onErrorReceived);
+    return removeErrorListener;
+  }, []);
 }
 
 export function retrieveVerificationCode(sms, codeLength = DEFAULT_CODE_LENGTH) {
