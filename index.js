@@ -1,38 +1,61 @@
-import { NativeEventEmitter, NativeModules } from 'react-native';
+import {NativeEventEmitter, NativeModules} from 'react-native';
 
-const { ReactNativeSmsUserConsent } = NativeModules;
+import Events from './constants/Events';
+
+/*
+Technically, the SMS receiving data flow consists of two parts:
+
+1) System -> Native
+This part uses the native SMS User Consent API to show the consent prompt and retrieves the SMS.
+
+2) Native -> JS
+This part emits an event to JS side with the SMS using default React Native event emitter, so that JS side is able to subscribe to the event and receive the SMS.
+*/
+
+const {ReactNativeSmsUserConsent} = NativeModules;
 
 const eventEmitter = new NativeEventEmitter(ReactNativeSmsUserConsent);
 
-export async function startSmsHandling() {
+async function startNativeSmsListener() {
   try {
-    await ReactNativeSmsUserConsent.startSmsHandling();
+    await ReactNativeSmsUserConsent.startNativeSmsListener();
   } catch (e) {
     console.error(e);
   }
 }
 
-export async function stopSmsHandling() {
+async function stopNativeSmsListener() {
   try {
-    await ReactNativeSmsUserConsent.stopSmsHandling();
+    await ReactNativeSmsUserConsent.stopNativeSmsListener();
   } catch (e) {
     console.error(e);
   }
 }
 
-export function addSmsListener(onSmsReceived) {
-  const listener = eventEmitter.addListener('SMS_RETRIEVED', onSmsReceived);
-  return () => {
-    listener.remove();
-  };
+export function startSmsHandling(onSmsReceived) {
+  startNativeSmsListener();
+  const jsListener = eventEmitter.addListener(
+    Events.SMS_RETRIEVED,
+    onSmsReceived,
+  );
+
+  function stopSmsHandling() {
+    stopNativeSmsListener();
+    jsListener.remove();
+  }
+
+  return stopSmsHandling;
 }
 
 export function addErrorListener(onErrorReceived) {
   const listener = eventEmitter.addListener(
-    'SMS_RETRIEVE_ERROR',
-    onErrorReceived
+    Events.SMS_RETRIEVE_ERROR,
+    onErrorReceived,
   );
-  return () => {
+
+  function removeErrorListener() {
     listener.remove();
-  };
+  }
+
+  return removeErrorListener;
 }

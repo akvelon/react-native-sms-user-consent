@@ -117,7 +117,7 @@ public class ReactNativeSmsUserConsentModule extends ReactContextBaseJavaModule 
     }
 
     @ReactMethod
-    public void startSmsHandling(Promise promise) {
+    public void startNativeSmsListener(Promise promise) {
         try {
             subscribe();
             promise.resolve(null);
@@ -127,7 +127,7 @@ public class ReactNativeSmsUserConsentModule extends ReactContextBaseJavaModule 
     }
 
     @ReactMethod
-    public void stopSmsHandling(Promise promise) {
+    public void stopNativeSmsListener(Promise promise) {
         try {
             unsubscribe();
             promise.resolve(null);

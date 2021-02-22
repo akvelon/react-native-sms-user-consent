@@ -3,8 +3,6 @@ import {StyleSheet, View, Text} from 'react-native';
 
 import {
   startSmsHandling,
-  stopSmsHandling,
-  addSmsListener,
   addErrorListener,
 } from 'react-native-sms-user-consent';
 
@@ -12,14 +10,7 @@ export default function App() {
   const [sms, setSms] = useState('');
 
   useEffect(() => {
-    startSmsHandling();
-    return () => {
-      stopSmsHandling();
-    };
-  }, []);
-
-  useEffect(() => {
-    const removeSmsListener = addSmsListener((event) => {
+    const stopSmsHandling = startSmsHandling((event) => {
       const receivedSms = event?.sms;
       if (!receivedSms) {
         console.warn('No SMS received!');
@@ -27,7 +18,7 @@ export default function App() {
       }
       setSms(receivedSms);
     });
-    return removeSmsListener;
+    return stopSmsHandling;
   }, []);
 
   useEffect(() => {
