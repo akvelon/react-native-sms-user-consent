@@ -1,32 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 
-import {
-  startSmsHandling,
-  addErrorListener,
-} from 'react-native-sms-user-consent';
+import {useSmsUserConsent} from 'react-native-sms-user-consent';
 
 export default function App() {
-  const [sms, setSms] = useState('');
-
-  useEffect(() => {
-    const stopSmsHandling = startSmsHandling((event) => {
-      const receivedSms = event?.sms;
-      if (!receivedSms) {
-        console.warn('No SMS received!');
-        return;
-      }
-      setSms(receivedSms);
-    });
-    return stopSmsHandling;
-  }, []);
-
-  useEffect(() => {
-    const removeErrorListener = addErrorListener((event) => {
-      console.log('Sms retrieve error:', event);
-    });
-    return removeErrorListener;
-  }, []);
+  const sms = useSmsUserConsent();
 
   return (
     <View style={styles.container}>

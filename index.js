@@ -1,3 +1,4 @@
+import {useEffect, useState} from 'react';
 import {NativeEventEmitter, NativeModules} from 'react-native';
 
 import Events from './constants/Events';
@@ -58,4 +59,22 @@ export function addErrorListener(onErrorReceived) {
   }
 
   return removeErrorListener;
+}
+
+export function useSmsUserConsent() {
+  const [sms, setSms] = useState('');
+
+  useEffect(() => {
+    const stopSmsHandling = startSmsHandling((event) => {
+      const receivedSms = event?.sms;
+      if (!receivedSms) {
+        console.warn('No SMS received!');
+        return;
+      }
+      setSms(receivedSms);
+    });
+    return stopSmsHandling;
+  }, []);
+
+  return sms;
 }
