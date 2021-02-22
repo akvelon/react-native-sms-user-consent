@@ -1,69 +1,56 @@
 React Native wrapper for Android's SMS User Consent API, ready to use in React Native components with minimum effort.
 
-# Getting started
+## Getting started
 
 Will be available after uploading to NPM.
 
-# Basic usage
-
-First of all, we should start the SMS receive process with `startSmsHandling` so that native part knows that it should handle SMS-messages and show the consent system modal to the user when the SMS is received. In order to stop handling SMS-messages we call `stopSmsHandling`. The common case to use it is when the Two-factor auth component is unmounted.
-
-Also, we should call `addSmsListener` with a callback in order to receive the actual SMS and use it in our app. `addSmsListener` method returns the `removeSmsListener` method that should be called whenever we want to stop receiving SMS-messages in our component.
+## Basic usage
 
 ```javascript
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { TextInput } from 'react-native';
 
-import { startSmsHandling, stopSmsHandling, addSmsListener } from 'react-native-sms-user-consent';
+import { useSmsUserConsent, retrieveVerificationCode } from 'react-native-sms-user-consent';
 
-function MyComponent() {
-  const [sms, setSms] = useState('');
+const Example = () => {
+  const [code, setCode] = useState();
 
-  useEffect(() => {
-    startSmsHandling();
-    return () => {
-      stopSmsHandling();
-    };
-  }, []);
+  const sms = useSmsUserConsent();
 
   useEffect(() => {
-    const removeSmsListener = addSmsListener((event) => {
-      const receivedSms = event?.sms;
-      if (!receivedSms) {
-        console.warn('No SMS received!');
-        return;
-      }
-      setSms(receivedSms);
-    });
-    return removeSmsListener;
-  }, []);
+    const retrievedCode = retrieveVerificationCode(sms);
+    if (retrievedCode) {
+      setCode(retrievedCode);
+    }
+  }, [sms]);
 
-  return <Text>SMS text: {sms}</Text>;
+  return <TextInput value={code} onChangeText={setCode} />;
 }
+
 ```
 
-# API
+In the example we use a controlled `TextInput` for the code entry. `sms` equals to the empty string initially, and whenever an SMS is handled `sms` receives its content. We use the `useEffect` to update the value when an SMS is handled. Inside the effect we use the `retrieveVerificationCode` method to retrieve the code from the SMS and update the input value with it.
 
-## Hooks
+## API
 
-### useSmsUserConsent
+### useSmsUserConsent()
 
 ```typescript
 useSmsUserConsent(): string
 ```
 
-Desc
+React hook that starts SMS handling and provides the handled SMS as its return value, which is the empty string initially. Stops handling SMS messages on unmount. Uses `startSmsHandling` internally.
 
-## Methods
+This hook is the way to go in most cases. Alternatively, you could use `startSmsHandling` if dealing with something that is not a functional component or you need some more flexibility.
 
-### startSmsHandling
+### startSmsHandling()
 
 ```typescript
 type Event = {
   sms?: string;
 }
 
-startSmsHandling(onSmsReceived: (event: Event) => void): (
+startSmsHandling(onSmsReceived: (event: {sms?: string}) => void): (
   stopSmsHandling(): void
 )
 ```
@@ -72,7 +59,7 @@ Starts the native SMS listener that will show the SMS User Consent system prompt
 
 Returns `stopSmsHandling` function that stops showing the system prompt and stops SMS handling.
 
-### retrieveVerificationCode
+### retrieveVerificationCode()
 
 ```typescript
 retrieveVerificationCode(sms: string, codeLength: number = 6): string | null
