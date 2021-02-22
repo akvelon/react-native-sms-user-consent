@@ -1,7 +1,7 @@
-import {useEffect, useState} from 'react';
-import {NativeEventEmitter, NativeModules} from 'react-native';
+import { useEffect, useState } from 'react';
+import { NativeEventEmitter, NativeModules } from 'react-native';
 
-import Events from './constants/Events';
+import { DEFAULT_CODE_LENGTH, Events } from './constants';
 
 /*
 Technically, the SMS receiving data flow consists of two parts:
@@ -77,4 +77,10 @@ export function useSmsUserConsent() {
   }, []);
 
   return sms;
+}
+
+export function retrieveVerificationCode(sms, codeLength = DEFAULT_CODE_LENGTH) {
+  const codeRegExp = new RegExp(`\\d{${codeLength}}`, 'm');
+  const code = sms?.match(codeRegExp)?.[0];
+  return code ?? null;
 }
