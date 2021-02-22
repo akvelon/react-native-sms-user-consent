@@ -1,12 +1,10 @@
-# React Native SMS User Consent
-
 React Native wrapper for Android's SMS User Consent API, ready to use in React Native components with minimum effort.
 
-## Getting started
+# Getting started
 
 Will be available after uploading to NPM.
 
-## Basic usage
+# Basic usage
 
 First of all, we should start the SMS receive process with `startSmsHandling` so that native part knows that it should handle SMS-messages and show the consent system modal to the user when the SMS is received. In order to stop handling SMS-messages we call `stopSmsHandling`. The common case to use it is when the Two-factor auth component is unmounted.
 
@@ -44,35 +42,43 @@ function MyComponent() {
 }
 ```
 
-## API
+# API
 
-The package provides the following methods:
+## Hooks
+
+### useSmsUserConsent
+
+```typescript
+useSmsUserConsent(): string
+```
+
+Desc
+
+## Methods
 
 ### startSmsHandling
 
 ```typescript
-startSmsHandling(): void
+type Event = {
+  sms?: string;
+}
+
+startSmsHandling(onSmsReceived: (event: Event) => void): (
+  stopSmsHandling(): void
+)
 ```
 
-Starts handling SMS messages from the native part; shows the system SMS consent modal when the message containing the one-time code is received.
+Starts the native SMS listener that will show the SMS User Consent system prompt. If the user has allowed reading the SMS, then the `onSmsReceived` callback is called. `onSmsReceived` receives the event object containing the SMS.
 
-### stopSmsHandling
+Returns `stopSmsHandling` function that stops showing the system prompt and stops SMS handling.
+
+### retrieveVerificationCode
 
 ```typescript
-stopSmsHandling(): void
+retrieveVerificationCode(sms: string, codeLength: number = 6): string | null
 ```
 
-Stops handling SMS messages from the native part and showing the system SMS consent modal to the user.
-
-### addSmsListener
-
-```typescript
-addSmsListener(
-  onSmsReceived: (?event: { ?sms: string }) => Function
-): void
-```
-
-Starts handling SMS messages on the JS part, receives a callback that handles the actual SMS message and uses it in the app. Returns `removeSmsListener` method that stops receiving messages.
+Retrieves the verification code from an SMS if there is any.
 
 ## Help
 
