@@ -1,4 +1,4 @@
-## React Native SMS User Consent
+# React Native SMS User Consent
 
 React Native wrapper for Android's SMS User Consent API, ready to use in React Native components with minimum effort.
 
