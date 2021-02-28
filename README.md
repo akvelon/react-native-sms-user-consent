@@ -2,6 +2,12 @@
 
 React Native wrapper for Android's SMS User Consent API, ready to use in React Native components with minimum effort.
 
+## iOS
+
+SMS User Consent API exists only on Android, so this package is Android-only. Calling the APIs on a non-Android environment is no-op.
+
+If you want auto-filling on iOS, `textContentType="oneTimeCode"` for `TextInput` is the way to go. Basically, this is the only way for iOS
+
 ## Getting started
 
 Will be available after uploading to NPM.
