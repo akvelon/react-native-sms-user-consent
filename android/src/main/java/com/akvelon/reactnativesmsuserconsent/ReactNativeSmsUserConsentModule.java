@@ -19,7 +19,7 @@ import java.util.Map;
 
 public class ReactNativeSmsUserConsentModule extends ReactContextBaseJavaModule {
 
-    private static final String SMS_RETRIEVED = "SMS_RETRIEVED";
+    private static final String AKV_SMS_RETRIEVED = "AKV_SMS_RETRIEVED";
     private static final String SMS_RETRIEVE_ERROR = "SMS_RETRIEVE_ERROR";
 
     public ReactApplicationContext reactContext;
@@ -105,7 +105,7 @@ public class ReactNativeSmsUserConsentModule extends ReactContextBaseJavaModule 
         params.putString("sms", sms);
         reactContext
             .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-            .emit(SMS_RETRIEVED, params);
+            .emit(AKV_SMS_RETRIEVED, params);
     }
 
     private void sendErrorEventToJs(RNSmsUserConsentException e) {

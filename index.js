@@ -36,7 +36,7 @@ async function stopNativeSmsListener() {
 export function startSmsHandling(onSmsReceived) {
   startNativeSmsListener();
   const jsListener = eventEmitter.addListener(
-    Events.SMS_RETRIEVED,
+    Events.AKV_SMS_RETRIEVED,
     onSmsReceived,
   );
 
