@@ -68,7 +68,7 @@ export function useSmsUserConsent() {
 
 export function addErrorListener(onErrorReceived) {
   const listener = eventEmitter.addListener(
-    Events.SMS_RETRIEVE_ERROR,
+    Events.AKV_SMS_RETRIEVE_ERROR,
     onErrorReceived,
   );
 

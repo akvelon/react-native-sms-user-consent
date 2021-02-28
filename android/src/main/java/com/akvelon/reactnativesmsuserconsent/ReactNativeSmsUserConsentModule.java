@@ -20,7 +20,7 @@ import java.util.Map;
 public class ReactNativeSmsUserConsentModule extends ReactContextBaseJavaModule {
 
     private static final String AKV_SMS_RETRIEVED = "AKV_SMS_RETRIEVED";
-    private static final String SMS_RETRIEVE_ERROR = "SMS_RETRIEVE_ERROR";
+    private static final String AKV_SMS_RETRIEVE_ERROR = "AKV_SMS_RETRIEVE_ERROR";
 
     public ReactApplicationContext reactContext;
     private SmsBroadcastReceiver broadcastReceiver;
@@ -113,7 +113,7 @@ public class ReactNativeSmsUserConsentModule extends ReactContextBaseJavaModule 
         params.putString(e.code, e.getMessage());
         reactContext
             .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-            .emit(SMS_RETRIEVE_ERROR, params);
+            .emit(AKV_SMS_RETRIEVE_ERROR, params);
     }
 
     @ReactMethod
