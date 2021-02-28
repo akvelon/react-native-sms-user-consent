@@ -13,15 +13,9 @@ This part uses the native SMS User Consent API to show the consent prompt and re
 This part emits an event to JS side with the SMS using default React Native event emitter, so that JS side is able to subscribe to the event and receive the SMS.
 */
 
-const {ReactNativeSmsUserConsent} = NativeModules;
+const { ReactNativeSmsUserConsent } = NativeModules;
 
 const eventEmitter = new NativeEventEmitter(ReactNativeSmsUserConsent);
-
-export function retrieveVerificationCode(sms, codeLength = DEFAULT_CODE_LENGTH) {
-  const codeRegExp = new RegExp(`\\d{${codeLength}}`, 'm');
-  const code = sms?.match(codeRegExp)?.[0];
-  return code ?? null;
-}
 
 async function startNativeSmsListener() {
   try {
@@ -37,6 +31,12 @@ async function stopNativeSmsListener() {
   } catch (e) {
     console.error(e);
   }
+}
+
+export function retrieveVerificationCode(sms, codeLength = DEFAULT_CODE_LENGTH) {
+  const codeRegExp = new RegExp(`\\d{${codeLength}}`, 'm');
+  const code = sms?.match(codeRegExp)?.[0];
+  return code ?? null;
 }
 
 export function startSmsHandling(onSmsReceived) {
@@ -98,3 +98,11 @@ export function useErrorListener(onErrorReceived) {
     return removeErrorListener;
   }, []);
 }
+
+export default {
+  retrieveVerificationCode,
+  startSmsHandling,
+  useSmsUserConsent,
+  addErrorListener,
+  useErrorListener,
+};
