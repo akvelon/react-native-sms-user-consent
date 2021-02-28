@@ -25,7 +25,6 @@ const Example = () => {
 
   return <TextInput value={code} onChangeText={setCode} />;
 }
-
 ```
 
 In the example we use a controlled `TextInput` for the code entry. `sms` equals to the empty string initially, and whenever an SMS is handled `sms` receives its content. We use the `useEffect` to update the value when an SMS is handled. Inside the effect we use the `retrieveVerificationCode` method to retrieve the code from the SMS and update the input value with it.
@@ -65,6 +64,18 @@ retrieveVerificationCode(sms: string, codeLength: number = 6): string | null
 ```
 
 Retrieves the verification code from an SMS if there is any.
+
+---
+
+*You can import the whole API as one object if you prefer*
+
+```javascript
+import SmsUserConsent from 'react-native-sms-user-consent';
+
+// ...
+SmsUserConsent.useSmsUserConsent();
+// ...
+```
 
 ## Help
 
