@@ -54,7 +54,7 @@ export function startSmsHandling(onSmsReceived) {
   return stopSmsHandling;
 }
 
-export function useSmsUserConsent() {
+export function useSmsUserConsent(codeLength = DEFAULT_CODE_LENGTH) {
   const [code, setCode] = useState('');
 
   useEffect(() => {
@@ -65,7 +65,7 @@ export function useSmsUserConsent() {
         return;
       }
 
-      const retrievedCode = retrieveVerificationCode(receivedSms);
+      const retrievedCode = retrieveVerificationCode(receivedSms, codeLength);
       if (!retrievedCode) {
         console.warn('No code retrieved!');
         return;
