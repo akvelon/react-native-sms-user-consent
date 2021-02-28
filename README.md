@@ -35,12 +35,12 @@ In the example we use a controlled `TextInput` for the code entry. `sms` equals 
 ### useSmsUserConsent()
 
 ```typescript
-useSmsUserConsent(): string
+useSmsUserConsent(codeLength = 6): string
 ```
 
-React hook that starts SMS handling and provides the handled SMS as its return value, which is the empty string initially. Stops handling SMS messages on unmount. Uses `startSmsHandling` internally.
+React hook that starts SMS handling and provides the handled SMS as its return value, which is the empty string initially. Stops handling SMS messages on unmount. Uses `startSmsHandling` and `retrieveVerificationCode` internally.
 
-This hook is the way to go in most cases. Alternatively, you could use `startSmsHandling` if dealing with something that is not a functional component or you need some more flexibility.
+This hook is the way to go in most cases. Alternatively, you can use `startSmsHandling` and `retrieveVerificationCode` directly if dealing with something that is not a functional component or you need some more flexibility.
 
 ### startSmsHandling()
 
