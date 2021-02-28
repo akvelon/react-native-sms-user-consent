@@ -12,19 +12,16 @@ Will be available after uploading to NPM.
 import React, { useEffect, useState } from 'react';
 import { TextInput } from 'react-native';
 
-import { useSmsUserConsent, retrieveVerificationCode } from 'react-native-sms-user-consent';
+import { useSmsUserConsent } from 'react-native-sms-user-consent';
 
 const Example = () => {
   const [code, setCode] = useState();
 
-  const sms = useSmsUserConsent();
+  const retrievedCode = useSmsUserConsent();
 
   useEffect(() => {
-    const retrievedCode = retrieveVerificationCode(sms);
-    if (retrievedCode) {
-      setCode(retrievedCode);
-    }
-  }, [sms]);
+    if (retrievedCode) setCode(retrievedCode);
+  }, [retrievedCode]);
 
   return <TextInput value={code} onChangeText={setCode} />;
 }
