@@ -17,6 +17,12 @@ const {ReactNativeSmsUserConsent} = NativeModules;
 
 const eventEmitter = new NativeEventEmitter(ReactNativeSmsUserConsent);
 
+export function retrieveVerificationCode(sms, codeLength = DEFAULT_CODE_LENGTH) {
+  const codeRegExp = new RegExp(`\\d{${codeLength}}`, 'm');
+  const code = sms?.match(codeRegExp)?.[0];
+  return code ?? null;
+}
+
 async function startNativeSmsListener() {
   try {
     await ReactNativeSmsUserConsent.startNativeSmsListener();
@@ -49,7 +55,7 @@ export function startSmsHandling(onSmsReceived) {
 }
 
 export function useSmsUserConsent() {
-  const [sms, setSms] = useState('');
+  const [code, setCode] = useState('');
 
   useEffect(() => {
     const stopSmsHandling = startSmsHandling((event) => {
@@ -58,12 +64,19 @@ export function useSmsUserConsent() {
         console.warn('No SMS received!');
         return;
       }
-      setSms(receivedSms);
+
+      const retrievedCode = retrieveVerificationCode(receivedSms);
+      if (!retrievedCode) {
+        console.warn('No code retrieved!');
+        return;
+      }
+
+      setCode(retrievedCode);
     });
     return stopSmsHandling;
   }, []);
 
-  return sms;
+  return code;
 }
 
 export function addErrorListener(onErrorReceived) {
@@ -84,10 +97,4 @@ export function useErrorListener(onErrorReceived) {
     const removeErrorListener = addErrorListener(onErrorReceived);
     return removeErrorListener;
   }, []);
-}
-
-export function retrieveVerificationCode(sms, codeLength = DEFAULT_CODE_LENGTH) {
-  const codeRegExp = new RegExp(`\\d{${codeLength}}`, 'm');
-  const code = sms?.match(codeRegExp)?.[0];
-  return code ?? null;
 }

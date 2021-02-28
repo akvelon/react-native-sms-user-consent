@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Text, TextInput, View } from 'react-native';
 
-import { useSmsUserConsent, retrieveVerificationCode } from 'react-native-sms-user-consent';
+import { useSmsUserConsent } from 'react-native-sms-user-consent';
 import styles from './styles';
 
 export default function App() {
   const [code, setCode] = useState();
 
-  const sms = useSmsUserConsent();
+  const receivedCode = useSmsUserConsent();
 
   useEffect(() => {
-    const retrievedCode = retrieveVerificationCode(sms);
-    if (retrievedCode) {
-      setCode(retrievedCode);
-    }
-  }, [sms]);
+    if (receivedCode) setCode(receivedCode);
+  }, [receivedCode]);
 
   return (
     <View style={styles.container}>
