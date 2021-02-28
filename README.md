@@ -4,7 +4,7 @@ React Native wrapper for Android's SMS User Consent API, ready to use in React N
 
 ## iOS
 
-SMS User Consent API exists only on Android, so this package is Android-only. Calling the APIs on a non-Android environment is no-op.
+SMS User Consent API exists only on Android, so this package is Android-only. Calling the APIs on iOS is no-op.
 
 If you want auto-filling on iOS, `textContentType="oneTimeCode"` for `TextInput` is the way to go. Basically, this is the only way for iOS
 
@@ -46,6 +46,8 @@ useSmsUserConsent(codeLength = 6): string
 React hook that starts SMS handling and provides the handled SMS as its return value, which is the empty string initially. Stops handling SMS messages on unmount. Uses `startSmsHandling` and `retrieveVerificationCode` internally.
 
 This hook is the way to go in most cases. Alternatively, you can use `startSmsHandling` and `retrieveVerificationCode` directly if dealing with something that is not a functional component or you need some more flexibility.
+
+On iOS it just returns the empty string, so no additional code to handle iOS is needed.
 
 ### startSmsHandling()
 
