@@ -38,7 +38,7 @@ const Example = () => {
   }, [retrievedCode]);
 
   return <TextInput value={code} onChangeText={setCode} />;
-}
+};
 ```
 
 In the example we use a controlled `TextInput` for the code entry. `sms` equals to the empty string initially, and whenever an SMS is handled `sms` receives its content. We use the `useEffect` to update the value when an SMS is handled. Inside the effect we use the `retrieveVerificationCode` method to retrieve the code from the SMS and update the input value with it.
