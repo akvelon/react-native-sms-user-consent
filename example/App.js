@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Text, TextInput, View } from 'react-native';
 
-import { useSmsUserConsent } from 'react-native-sms-user-consent';
+import { useSmsUserConsent } from '@eabdullazyanov/react-native-sms-user-consent';
 import styles from './styles';
 
 export default function App() {

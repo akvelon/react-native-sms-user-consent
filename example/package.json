@@ -11,9 +11,9 @@
     "postinstall": "node ../scripts/examples_postinstall.js"
   },
   "dependencies": {
+    "@eabdullazyanov/react-native-sms-user-consent": "file:../",
     "react": "16.13.1",
-    "react-native": "0.63.4",
-    "react-native-sms-user-consent": "file:../"
+    "react-native": "0.63.4"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
