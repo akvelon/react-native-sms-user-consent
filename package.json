@@ -4,10 +4,6 @@
   "version": "1.0.1",
   "description": "TODO",
   "main": "index.js",
-  "files": [
-    "android",
-    "src"
-  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

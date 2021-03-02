@@ -1,0 +1,19 @@
+# Example app
+/example
+
+# Android
+android/build/
+android/.idea/
+android/.gradle/
+android/local.properties
+android/*.iml
+
+# ESLint
+.eslintrc.js
+
+# Scripts
+scripts/
+
+# Prettier
+.prettierrc.json
+
