@@ -25,6 +25,10 @@
     "auth",
     "authentication"
   ],
+  "bugs": {
+    "url" : "https://github.com/akvelon/react-native-sms-user-consent/issues",
+    "email" : "eldar.abdullazyanov@akvelon.com"
+  },
   "author": {
     "name": "Your Name",
     "email": "yourname@email.com"
