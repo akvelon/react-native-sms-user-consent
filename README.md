@@ -41,7 +41,7 @@ const Example = () => {
 };
 ```
 
-In the example we use a controlled `TextInput` for the code entry. `code` equals to the empty string initially, and whenever an SMS is handled `code` receives the code from it. We use the `useEffect` to update the value when an SMS is handled.
+In the example we use a controlled `TextInput` for the code entry. `retrievedCode` equals to the empty string initially, and whenever an SMS is handled `retrievedCode` receives the code from it. We use the `useEffect` to update the input value when an SMS is handled.
 
 ## API
 
