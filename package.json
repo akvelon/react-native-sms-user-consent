@@ -7,7 +7,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": "github:akvelon/react-native-sms-user-consent",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akvelon/react-native-sms-user-consent.git",
+    "baseUrl": "https://github.com/akvelon/react-native-sms-user-consent"
+  },
   "keywords": [
     "react-native",
     "android",
