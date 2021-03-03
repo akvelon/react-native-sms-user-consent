@@ -1,10 +1,10 @@
 # React Native SMS User Consent
 
-React Native wrapper for Android's SMS User Consent API, ready to use in React Native apps with minimum effort.
+React Native wrapper for Android's SMS User Consent API, ready to use in React Native apps with minimum effort. The purpose of SMS User Consent API is to provide one-tap auto-filling of SMS verification codes.
 
 ## iOS
 
-SMS User Consent API exists only on Android, so this package is Android-only. Calling the APIs on iOS is no-op.
+SMS User Consent API exists only on Android, so this package is Android-only. Calling this package's APIs on iOS is no-op.
 
 If you want auto-filling on iOS, `textContentType="oneTimeCode"` for `TextInput` is the way to go. Basically, this is the only way for iOS.
 
@@ -51,7 +51,7 @@ In the example we use a controlled `TextInput` for the code entry. `retrievedCod
 useSmsUserConsent(codeLength = 6): string
 ```
 
-React hook that starts SMS handling and provides the handled SMS as its return value, which is the empty string initially. Stops handling SMS messages on unmount. Uses `startSmsHandling` and `retrieveVerificationCode` internally.
+React hook that starts SMS handling and provides the received code as its return value, which is the empty string initially. Stops handling SMS messages on unmount. Uses `startSmsHandling` and `retrieveVerificationCode` internally.
 
 This hook is the way to go in most cases. Alternatively, you can use `startSmsHandling` and `retrieveVerificationCode` directly if dealing with something that is not a functional component or you need some more flexibility.
 
@@ -69,7 +69,7 @@ startSmsHandling(onSmsReceived: (event: {sms?: string}) => void): (
 )
 ```
 
-Starts the native SMS listener that will show the SMS User Consent system prompt. If the user has allowed reading the SMS, then the `onSmsReceived` callback is called. `onSmsReceived` receives the event object containing the SMS.
+Starts the native SMS listener that will show the SMS User Consent system prompt. If the user allowed reading the SMS, then the `onSmsReceived` callback is called. `onSmsReceived` receives the event object containing the SMS.
 
 Returns `stopSmsHandling` function that stops showing the system prompt and stops SMS handling.
 
