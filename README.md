@@ -60,10 +60,6 @@ On iOS it just returns the empty string, so no additional code to handle iOS is 
 ### startSmsHandling()
 
 ```typescript
-type Event = {
-  sms?: string;
-}
-
 startSmsHandling(onSmsReceived: (event: {sms?: string}) => void): (
   stopSmsHandling(): void
 )
