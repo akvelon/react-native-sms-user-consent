@@ -10,6 +10,8 @@ If you want auto-filling on iOS, `textContentType="oneTimeCode"` for `TextInput`
 
 ## Getting started
 
+Install [the package](https://www.npmjs.com/package/@eabdullazyanov/react-native-sms-user-consent):
+
 ```
 yarn add @eabdullazyanov/react-native-sms-user-consent
 ```
