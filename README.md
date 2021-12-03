@@ -93,7 +93,11 @@ SmsUserConsent.useSmsUserConsent();
 
 ## Help
 
-If you have any ideas about the project or found a bug or have a question, feel free to create an issue with all the relevant information. We are engaged to response ASAP.
+If you have any ideas about the project or found a bug or have a question, feel free to create an issue with all the relevant information. We are engaged to response ASAP. The following info will make it faster to resolve issues:
+
+1. Device or emulator model
+2. Android version
+3. Your environment info - output of the `npx react-native info` command
 
 ## Contribution
 
