@@ -1,16 +1,11 @@
 {
-  "name": "@eabdullazyanov/react-native-sms-user-consent",
+  "name": "@trupropel/react-native-sms-user-consent",
   "title": "React Native Sms User Consent",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "React Native wrapper for Android's SMS User Consent API, ready to use in React Native apps with minimum effort",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/akvelon/react-native-sms-user-consent.git",
-    "baseUrl": "https://github.com/akvelon/react-native-sms-user-consent"
   },
   "keywords": [
     "react-native",
@@ -25,10 +20,6 @@
     "auth",
     "authentication"
   ],
-  "bugs": {
-    "url": "https://github.com/akvelon/react-native-sms-user-consent/issues",
-    "email": "eldar.abdullazyanov@akvelon.com"
-  },
   "author": {
     "name": "Eldar Abdullazyanov",
     "email": "eldar.abdullazyanov@akvelon.com"

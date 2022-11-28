@@ -20,7 +20,6 @@ def safeExtGet(prop, fallback) {
 }
 
 apply plugin: 'com.android.library'
-apply plugin: 'maven'
 
 buildscript {
     // The Android Gradle plugin is only required when opening the android folder stand-alone.
@@ -39,7 +38,6 @@ buildscript {
 }
 
 apply plugin: 'com.android.library'
-apply plugin: 'maven'
 
 android {
     compileSdkVersion safeExtGet('compileSdkVersion', DEFAULT_COMPILE_SDK_VERSION)
@@ -57,15 +55,15 @@ android {
 
 repositories {
     // ref: https://www.baeldung.com/maven-local-repository
-    mavenLocal()
-    maven {
-        // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
-        url "$rootDir/../node_modules/react-native/android"
-    }
-    maven {
+    //mavenLocal()
+    //maven {
+    //    // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
+    //    url "$rootDir/../node_modules/react-native/android"
+    //}
+    //maven {
         // Android JSC is installed from npm
-        url "$rootDir/../node_modules/jsc-android/dist"
-    }
+    //    url "$rootDir/../node_modules/jsc-android/dist"
+    //}
     google()
     jcenter()
 }
@@ -111,7 +109,7 @@ afterEvaluate { project ->
     task androidJavadoc(type: Javadoc) {
         source = android.sourceSets.main.java.srcDirs
         classpath += files(android.bootClasspath)
-        classpath += files(project.getConfigurations().getByName('compile').asList())
+        //classpath += files(project.getConfigurations().getByName('compile').asList())
         include '**/*.java'
     }
 
@@ -142,10 +140,10 @@ afterEvaluate { project ->
 
     task installArchives(type: Upload) {
         configuration = configurations.archives
-        repositories.mavenDeployer {
-            // Deploy to react-native-event-bridge/maven, ready to publish to npm
-            repository url: "file://${projectDir}/../android/maven"
-            configureReactNativePom pom
-        }
+        //repositories.mavenDeployer {
+        //    // Deploy to react-native-event-bridge/maven, ready to publish to npm
+        //    repository url: "file://${projectDir}/../android/maven"
+        //    configureReactNativePom pom
+        //}
     }
 }
