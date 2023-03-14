@@ -1019,11 +1019,11 @@ __metadata:
 
 "@eabdullazyanov/react-native-sms-user-consent@file:../::locator=example%40workspace%3A.":
   version: 1.0.10
-  resolution: "@eabdullazyanov/react-native-sms-user-consent@file:../#../::hash=654e18&locator=example%40workspace%3A."
+  resolution: "@eabdullazyanov/react-native-sms-user-consent@file:../#../::hash=c616f2&locator=example%40workspace%3A."
   peerDependencies:
     react: ^16.8.1
     react-native: ">=0.60.0-rc.0 <1.0.x"
-  checksum: f8b79cad8827fd834184bd2129666b6646b866172da761cd601a82baee0fce7c89d3b261277a71b2c5a8a0aa7ae6325ae9ad9e97df98a8a394d90986985be263
+  checksum: 0f9ef3a79fe99cdce7864f734e5d6f401150a8ccbe8db74fc7a399d2bbb7e9cb8fa43e76699590115bfc90afd664e7c4cd5e2d14981d1dc82aa3954975a9d829
   languageName: node
   linkType: hard
 
