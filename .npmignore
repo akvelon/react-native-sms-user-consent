@@ -2,7 +2,7 @@
 .yarn/
 
 # Example app
-/example
+example/
 
 # Android
 android/build/
