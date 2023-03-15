@@ -27,7 +27,7 @@ declare function startSmsHandling(onSmsReceived: (event?: StartSmsHandlingEvent)
  *
  * @param codeLength A length of the code in SMS. Defaults to 6 if not provided.
  */
-declare function useSmsUserConsent(codeLength?: number): string
+declare function useSmsUserConsent(codeLength?: number): string;
 
 declare function addErrorListener(onErrorReceived: ErrorListener): () => void;
 
