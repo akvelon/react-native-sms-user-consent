@@ -4,6 +4,7 @@
   "version": "1.0.10",
   "description": "React Native wrapper for Android's SMS User Consent API, ready to use in React Native apps with minimum effort",
   "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
