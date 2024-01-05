@@ -2,9 +2,9 @@ package com.akvelon.reactnativesmsuserconsent;
 
 import android.app.Activity;
 import android.content.IntentFilter;
-
+import android.content.Context;
 import androidx.annotation.NonNull;
-
+import android.os.Build;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -44,12 +44,20 @@ public class ReactNativeSmsUserConsentModule extends ReactContextBaseJavaModule 
         SmsRetriever.getClient(getCurrentActivity()).startSmsUserConsent(null);
 
         broadcastReceiver = new SmsBroadcastReceiver(getCurrentActivity(), this);
-        getCurrentActivity().registerReceiver(
-                broadcastReceiver,
-                new IntentFilter(SmsRetriever.SMS_RETRIEVED_ACTION),
-                SmsRetriever.SEND_PERMISSION,
-                null
-        );
+        if (Build.VERSION.SDK_INT >= 34 && getCurrentActivity().getApplicationInfo().targetSdkVersion >= 34) {
+            getCurrentActivity().registerReceiver(
+                    broadcastReceiver,
+                    new IntentFilter(SmsRetriever.SMS_RETRIEVED_ACTION),
+                    SmsRetriever.SEND_PERMISSION, null,
+                    Context.RECEIVER_EXPORTED);
+        } else {
+            getCurrentActivity().registerReceiver(
+                    broadcastReceiver,
+                    new IntentFilter(SmsRetriever.SMS_RETRIEVED_ACTION),
+                    SmsRetriever.SEND_PERMISSION,
+                    null
+            );
+        }
 
         reactContext.addActivityEventListener(listener);
     }
