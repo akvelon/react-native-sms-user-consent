@@ -29,10 +29,10 @@ buildscript {
     if (project == rootProject) {
         repositories {
             google()
-            jcenter()
+            mavenCentral()
         }
         dependencies {
-            classpath 'com.android.tools.build:gradle:3.4.1'
+            classpath 'com.android.tools.build:gradle:7.0.4'
         }
     }
 }
@@ -40,6 +40,8 @@ buildscript {
 apply plugin: 'com.android.library'
 
 android {
+    namespace = "com.eabdullazyanov.rnsmsuserconsent"
+
     compileSdkVersion safeExtGet('compileSdkVersion', DEFAULT_COMPILE_SDK_VERSION)
     buildToolsVersion safeExtGet('buildToolsVersion', DEFAULT_BUILD_TOOLS_VERSION)
     defaultConfig {
@@ -55,7 +57,7 @@ android {
 
 repositories {
     google()
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
@@ -103,12 +105,12 @@ afterEvaluate { project ->
     }
 
     task androidJavadocJar(type: Jar, dependsOn: androidJavadoc) {
-        classifier = 'javadoc'
+        archiveClassifier = 'javadoc'
         from androidJavadoc.destinationDir
     }
 
     task androidSourcesJar(type: Jar) {
-        classifier = 'sources'
+        archiveClassifier = 'sources'
         from android.sourceSets.main.java.srcDirs
         include '**/*.java'
     }
