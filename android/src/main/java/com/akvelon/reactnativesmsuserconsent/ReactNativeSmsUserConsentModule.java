@@ -1,7 +1,10 @@
 package com.akvelon.reactnativesmsuserconsent;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.IntentFilter;
+import android.os.Build;
 
 import androidx.annotation.NonNull;
 
