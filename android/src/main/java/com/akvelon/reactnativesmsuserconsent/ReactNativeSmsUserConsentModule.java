@@ -55,7 +55,7 @@ public class ReactNativeSmsUserConsentModule extends ReactContextBaseJavaModule 
                     new IntentFilter(SmsRetriever.SMS_RETRIEVED_ACTION),
                     SmsRetriever.SEND_PERMISSION,
                     null,
-                    Context.RECEIVER_NOT_EXPORTED
+                    Context.RECEIVER_EXPORTED
             );
         } else {
             getCurrentActivity().registerReceiver(
