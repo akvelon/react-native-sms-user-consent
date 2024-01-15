@@ -1,7 +1,10 @@
 package com.akvelon.reactnativesmsuserconsent;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.IntentFilter;
+import android.os.Build;
 
 import androidx.annotation.NonNull;
 
@@ -32,6 +35,8 @@ public class ReactNativeSmsUserConsentModule extends ReactContextBaseJavaModule 
         listener = new SmsListener(this);
     }
 
+    // Suppress warning on getCurrentActivity().registerReceiver for SDK before 33.
+    @SuppressLint("UnspecifiedRegisterReceiverFlag")
     private void subscribe() throws RNSmsUserConsentException {
         Activity activity = getCurrentActivity();
         if (activity == null) {
@@ -44,12 +49,22 @@ public class ReactNativeSmsUserConsentModule extends ReactContextBaseJavaModule 
         SmsRetriever.getClient(getCurrentActivity()).startSmsUserConsent(null);
 
         broadcastReceiver = new SmsBroadcastReceiver(getCurrentActivity(), this);
-        getCurrentActivity().registerReceiver(
-                broadcastReceiver,
-                new IntentFilter(SmsRetriever.SMS_RETRIEVED_ACTION),
-                SmsRetriever.SEND_PERMISSION,
-                null
-        );
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            getCurrentActivity().registerReceiver(
+                    broadcastReceiver,
+                    new IntentFilter(SmsRetriever.SMS_RETRIEVED_ACTION),
+                    SmsRetriever.SEND_PERMISSION,
+                    null,
+                    Context.RECEIVER_EXPORTED
+            );
+        } else {
+            getCurrentActivity().registerReceiver(
+                    broadcastReceiver,
+                    new IntentFilter(SmsRetriever.SMS_RETRIEVED_ACTION),
+                    SmsRetriever.SEND_PERMISSION,
+                    null
+            );
+        }
 
         reactContext.addActivityEventListener(listener);
     }
