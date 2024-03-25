@@ -20,7 +20,6 @@ def safeExtGet(prop, fallback) {
 }
 
 apply plugin: 'com.android.library'
-// apply plugin: 'maven'
 
 buildscript {
     // The Android Gradle plugin is only required when opening the android folder stand-alone.
@@ -30,16 +29,15 @@ buildscript {
     if (project == rootProject) {
         repositories {
             google()
-            jcenter()
+            mavenCentral()
         }
         dependencies {
-            classpath 'com.android.tools.build:gradle:3.4.1'
+            classpath 'com.android.tools.build:gradle:7.0.4'
         }
     }
 }
 
 apply plugin: 'com.android.library'
-// apply plugin: 'maven'
 
 android {
     compileSdkVersion safeExtGet('compileSdkVersion', DEFAULT_COMPILE_SDK_VERSION)
@@ -61,7 +59,7 @@ android {
 
 repositories {
     google()
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
@@ -105,18 +103,17 @@ afterEvaluate { project ->
     task androidJavadoc(type: Javadoc) {
         source = android.sourceSets.main.java.srcDirs
         classpath += files(android.bootClasspath)
-//         project.getConfigurations().getByName('implementation').setCanBeResolved(true)
-//         classpath += files(project.getConfigurations().getByName('implementation').asList())
+
         include '**/*.java'
     }
 
     task androidJavadocJar(type: Jar, dependsOn: androidJavadoc) {
-        classifier = 'javadoc'
+        archiveClassifier = 'javadoc'
         from androidJavadoc.destinationDir
     }
 
     task androidSourcesJar(type: Jar) {
-        classifier = 'sources'
+        archiveClassifier = 'sources'
         from android.sourceSets.main.java.srcDirs
         include '**/*.java'
     }
@@ -134,13 +131,8 @@ afterEvaluate { project ->
         archives androidSourcesJar
         archives androidJavadocJar
     }
-
-//    task installArchives(type: Upload) {
-//        configuration = configurations.archives
-//        repositories.mavenDeployer {
-//            // Deploy to react-native-event-bridge/maven, ready to publish to npm
-//            repository url: "file://${projectDir}/../android/maven"
-//            configureReactNativePom pom
-//        }
-//    }
+    
+    task installArchives(type: Upload) {
+        configuration = configurations.archives
+    }
 }
