@@ -45,12 +45,28 @@ const Example = () => {
 
 In the example we use a controlled `TextInput` for the code entry. `retrievedCode` equals to the empty string initially, and whenever an SMS is handled `retrievedCode` receives the code from it. We use the `useEffect` to update the input value when an SMS is handled.
 
+### Customise verification code parser
+
+Set the length of the validation code:
+
+```typescript
+const retrievedCode = useSmsUserConsent(4);
+// e.g. code = 1234
+```
+
+Provide a custom regular expression:
+
+```typescript
+const retrievedCode = useSmsUserConsent('[A-Z0-9]{5}');
+// e.g. code = A12B3
+```
+
 ## API
 
 ### useSmsUserConsent()
 
 ```typescript
-useSmsUserConsent(codeLength = 6): string
+useSmsUserConsent(config: number | string): string
 ```
 
 React hook that starts SMS handling and provides the received code as its return value, which is the empty string initially. Stops handling SMS messages on unmount. Uses `startSmsHandling` and `retrieveVerificationCode` internally.
@@ -58,6 +74,8 @@ React hook that starts SMS handling and provides the received code as its return
 This hook is the way to go in most cases. Alternatively, you can use `startSmsHandling` and `retrieveVerificationCode` directly if dealing with something that is not a functional component or you need some more flexibility.
 
 On iOS it just returns the empty string, so no additional code to handle iOS is needed.
+
+Accepts an optional `config` parameter. In case if it's a number, it defines the length of the code. In case if it is a string, it defines a custom RegExp to parse the code.
 
 ### startSmsHandling()
 
@@ -74,10 +92,12 @@ Returns `stopSmsHandling` function that stops showing the system prompt and stop
 ### retrieveVerificationCode()
 
 ```typescript
-retrieveVerificationCode(sms: string, codeLength: number = 6): string | null
+retrieveVerificationCode(sms: string, config: number | string): string | null
 ```
 
 Retrieves the verification code from an SMS if there is any.
+
+Accepts an optional `config` parameter. In case if it's a number, it defines the length of the code. In case if it is a string, it defines a custom RegExp to parse the code.
 
 ---
 

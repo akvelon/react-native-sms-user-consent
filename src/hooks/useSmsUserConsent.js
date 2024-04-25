@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 
-import { DEFAULT_CODE_LENGTH } from '../constants';
 import startSmsHandling from '../startSmsHandling';
 import retrieveVerificationCode from '../retrieveVerificationCode';
 
-export default function useSmsUserConsent(codeLength = DEFAULT_CODE_LENGTH) {
+export default function useSmsUserConsent(config) {
   const [code, setCode] = useState('');
 
   useEffect(() => {
@@ -15,7 +14,7 @@ export default function useSmsUserConsent(codeLength = DEFAULT_CODE_LENGTH) {
         return;
       }
 
-      const retrievedCode = retrieveVerificationCode(receivedSms, codeLength);
+      const retrievedCode = retrieveVerificationCode(receivedSms, config);
       if (!retrievedCode) {
         console.warn('No code retrieved!');
         return;
@@ -24,7 +23,7 @@ export default function useSmsUserConsent(codeLength = DEFAULT_CODE_LENGTH) {
       setCode(retrievedCode);
     });
     return stopSmsHandling;
-  }, [codeLength]);
+  }, [config]);
 
   return code;
 }
