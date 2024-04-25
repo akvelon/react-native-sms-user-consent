@@ -124,10 +124,9 @@ If you have any ideas about the project or found a bug or have a question, feel 
 PRs are always welcome. If you're feeling like contributing to the project, please do. It would be great to have all the relevant information with the PR.
 
 To make changes, you'll need to follow these steps:
-1) clone the repo
-2) go to `/example` folder
-3) run `yarn` and `npx react-native run-android` to build and view the example project
-4) make changes
-5) repeat steps 3 and 4 until the desired result is achieved
-6) create a PR
-7) 🥳
+
+1. clone the repo
+2. make changes
+3. test the changes
+4. create a PR
+5. 🥳

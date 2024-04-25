@@ -1,9 +1,6 @@
 # Yarn
 .yarn/
 
-# Example app
-example/
-
 # Android
 android/build/
 android/.idea/
