@@ -49,7 +49,7 @@ public class ReactNativeSmsUserConsentModule extends ReactContextBaseJavaModule 
         SmsRetriever.getClient(getCurrentActivity()).startSmsUserConsent(null);
 
         broadcastReceiver = new SmsBroadcastReceiver(getCurrentActivity(), this);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
             getCurrentActivity().registerReceiver(
                     broadcastReceiver,
                     new IntentFilter(SmsRetriever.SMS_RETRIEVED_ACTION),
@@ -86,10 +86,18 @@ public class ReactNativeSmsUserConsentModule extends ReactContextBaseJavaModule 
             );
         }
 
-        activity.unregisterReceiver(broadcastReceiver);
-        broadcastReceiver = null;
+        try {
+            activity.unregisterReceiver(broadcastReceiver);
+            broadcastReceiver = null;
 
-        reactContext.removeActivityEventListener(listener);
+            reactContext.removeActivityEventListener(listener);
+        } catch (IllegalArgumentException e) {
+            // There is a small chance that the receiver's onReceive(Context, Intent) method is called more than once, since it is registered with multiple IntentFilters, creating the potential for an IllegalArgumentException being thrown from Context#unregisterReceiver(BroadcastReceiver).
+            throw new RNSmsUserConsentException(
+                    Errors.NULL_BROADCAST_RECEIVER,
+                    "Could not unsubscribe, broadcastReceiver is null"
+            );
+        }
     }
 
     private void resubscribe() {
