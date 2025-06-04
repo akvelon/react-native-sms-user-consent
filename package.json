@@ -4,6 +4,7 @@
   "version": "1.2.1",
   "description": "React Native wrapper for Android's SMS User Consent API, ready to use in React Native apps with minimum effort",
   "main": "index.js",
+  "react-native": "src/index.android.js",
   "types": "index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -38,14 +39,14 @@
   "licenseFilename": "LICENSE",
   "readmeFilename": "README.md",
   "peerDependencies": {
-    "react": "^16 || ^17 || ^18",
-    "react-native": ">=0.66.5 <1.0.x"
+  "react": ">=16.0.0 <20.0.0 || ^19.0.0",
+  "react-native": ">=0.66.5 <1.0.0"
   },
   "devDependencies": {
     "@react-native-community/eslint-config": "^3",
     "eslint": "^8",
     "prettier": "^3",
-    "react": "^17",
-    "react-native": "^0.66.5"
+    "react": "^19.0.0",
+    "react-native": "^0.79.2"
   }
 }
